@@ -116,7 +116,7 @@
                 <div class="r_form clearfix"><label class="labels_w">任务范围：</label>
                     <select name="rangeType" id="rangeType" class="selects easyui-combobox"
                             data-options="required:true,editable:false" style="height: 28px;">
-                        <option value="1">目标机器</option>
+                        <%--<option value="1">目标机器</option>--%>
                         <option value="2">产品版本</option>
                         <option value="3">目标网吧</option>
                         <option value="4">代理商</option>

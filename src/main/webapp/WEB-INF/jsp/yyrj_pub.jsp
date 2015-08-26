@@ -34,8 +34,7 @@
         <div class="nav">
             <has:operate> <a href="/filetype/list?tid=${tid}&fid=1">更新包管理</a></has:operate>
             <has:operate><a href="/filetype/list?tid=${tid}&fid=2">资源包管理</a></has:operate>
-            <has:operate><a href="/pub/list?tid=${tid}&fid=1"  <c:if
-                    test="${fid==1}"> class="on" </c:if>>更新发布管理</a></has:operate>
+            <has:operate><a href="/pub/list?tid=${tid}&fid=1"  <c:if test="${fid==1}"> class="on" </c:if>>更新发布管理</a></has:operate>
             <has:operate> <a href="/pub/list?tid=${tid}&fid=2" <c:if
                     test="${fid==2}"> class="on" </c:if>>资源发布管理</a></has:operate>
         </div>
@@ -124,7 +123,7 @@
             <div class="r_form clearfix"><label class="labels_w">任务范围：</label>
                 <select name="rangeType" id="rangeType" class="selects easyui-combobox"
                         data-options="required:true,editable:false" style="height: 28px;">
-                    <option value="1">目标机器</option>
+                    <%--<option value="1">目标机器</option>--%>
                     <option value="2">产品版本</option>
                     <option value="3">目标网吧</option>
                     <option value="4">代理商</option>
