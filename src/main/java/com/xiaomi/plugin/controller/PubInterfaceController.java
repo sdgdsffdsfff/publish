@@ -33,7 +33,7 @@ public class PubInterfaceController extends BaseController {
         String version = getStrValue("version");
         String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
-        String barid=getStrValue("barid");
+        String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
         if (sid == null) {
             return "[empty sid]";
@@ -52,7 +52,7 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[Expired pub or error sid]";
         }
-        return this.pub(pubList, version, localid, agentid, barid,request);
+        return this.pub(pubList, version, localid, agentid,userId ,request);
     }
 
 
@@ -62,7 +62,7 @@ public class PubInterfaceController extends BaseController {
         String version = getStrValue("version");
         String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
-        String barid=getStrValue("barid");
+        String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
         if (sid == null) {
             return "[empty sid]";
@@ -80,7 +80,7 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[Expired pub or error sid]";
         }
-        return this.pub(pubList, version, localid, agentid, barid,request);
+        return this.pub(pubList, version, localid, agentid, userId,request);
     }
 
     @RequestMapping(value = "/plugins.do")
@@ -89,7 +89,7 @@ public class PubInterfaceController extends BaseController {
         String version = getStrValue("version");
         String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
-        String barid=getStrValue("barid");
+        String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
 
         if (sid == null) {
@@ -105,11 +105,11 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[Expired pub]";
         }
-        return this.pub(pubList, version, localid, agentid,barid, request);
+        return this.pub(pubList, version, localid, agentid,userId, request);
     }
 
     @SuppressWarnings("all")
-    private String pub(List<Pub> list, String version, String localid, String agentid,String barid, HttpServletRequest request) {
+    private String pub(List<Pub> list, String version, String localid, String agentid,String userId, HttpServletRequest request) {
         //这里根据发布延迟
         // 限制次数做筛选
         List<Pub> newList = new ArrayList<Pub>();
@@ -142,7 +142,7 @@ public class PubInterfaceController extends BaseController {
         String ip = IPUtil.getIp(request);
         String address = IPUtil.getIPAddress(ip);
         PubHelper<String, FileList> pubPubHelper = new PubHelper<String, FileList>();
-        pubPubHelper.put(newList, version, localid, agentid,barid, address);
+        pubPubHelper.put(newList, version, localid, agentid,userId, address);
 
         //将使用过的发布 记录下被使用过的次数 limit>0 有限制次数 number>0 有获取次数
         for (Pub pub : newList) {

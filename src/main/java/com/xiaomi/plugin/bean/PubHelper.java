@@ -22,7 +22,7 @@ public class PubHelper<K, V> extends HashMap<K, V> {
      * @param address 用户的address
      */
     @SuppressWarnings("unchecked")
-    public void put(List<Pub> list, String version, String localid, String agentid, String barid, String address) {
+    public void put(List<Pub> list, String version, String localid, String agentid, String userId, String address) {
         int i = 0;//filelist 放入的顺序
         for (Pub pub : list) {
             String rangType = pub.getRangeType();
@@ -68,7 +68,7 @@ public class PubHelper<K, V> extends HashMap<K, V> {
                         if (model == null) {
                             model = (FileList) this.get(name + "-2");
                             if (model == null) {
-                                if (StringUtils.isNotEmpty(barid) && rangValue.contains(barid)) {
+                                if (StringUtils.isNotEmpty(userId) && rangValue.contains(userId)) {
                                     super.put((K) key, (V) file);
                                     //放入优先级为3的 过后 移除优先级比3低的
                                     super.remove(name + "-4");
