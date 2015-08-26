@@ -109,7 +109,7 @@
             </div>
             <div class="r_form clearfix"><label class="labels_w">上传文件：</label>
                 <input type="text" name="url" id="url" class="inputs easyui-textbox"
-                       data-options="buttonText:'浏览',required:true,onClickButton:function(){$('#uploadWindow').window('open')},editable:false"
+                       data-options="buttonText:'浏览',required:true,onClickButton:function(){$('#uploadWindow').window('open')}"
                        style="height: 28px;"/>
             </div>
             <div class="r_form clearfix"><label class="labels_w">资源MD5：</label>

@@ -58,7 +58,7 @@ public class UploadController {
         try {
             file.transferTo(desFile);
 
-            map.put("url", "http://localhost:8080/resources/upload/" + fileName);
+            map.put("url", "http://192.168.38.220:8080/resources/upload/" + fileName);
 
             if ("1".equals(isMd)) {
                 map.put("md5", MD5Util.getFileMD5String(desFile));

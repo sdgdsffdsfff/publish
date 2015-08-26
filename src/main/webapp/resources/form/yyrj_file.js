@@ -1,6 +1,8 @@
 function dosubmit(id) {
-    $('#' + id).form('submit', {
+    var $e=$('#' + id);
+    $e.form('submit', {
         onSubmit: function () {
+            $('<div class="datagrid-mask-msg" style="display:block;left:40%">表单提交中,请稍后......</div>').appendTo($e);
             return $(this).form('enableValidation').form('validate');
         }
     });
@@ -30,6 +32,7 @@ $(function () {
     $('#add').form({
         novalidate: true,
         success: function (data) {
+          $("div[class='datagrid-mask-msg']").remove();
             try {
                 var jsondata = $.parseJSON(data);
                 var success = jsondata.success;
@@ -51,7 +54,7 @@ $(function () {
     $('#upload').form({
         novalidate: true,
         success: function (data) {
-
+            $("div[class='datagrid-mask-msg']").remove();
             try {
                 var jsondata = $.parseJSON(data);
                 $("#url").textbox("setValue", jsondata.url);

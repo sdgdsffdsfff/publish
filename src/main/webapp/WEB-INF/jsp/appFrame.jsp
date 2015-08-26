@@ -42,7 +42,7 @@
     <div class="vmenu">
         <div class="mt80">
             <div class="soft_add">
-                <a href="#"><span>管理软件类型</span></a>
+                <a href="/type/list"><span>管理软件类型</span></a>
             </div>
             <ul>
                 <c:forEach items="${type}" var="ty">

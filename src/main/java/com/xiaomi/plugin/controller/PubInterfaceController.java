@@ -31,7 +31,7 @@ public class PubInterfaceController extends BaseController {
     public String upgrade(HttpServletRequest request) {
         //应用软件 style=1
         String version = getStrValue("version");
-        String localid = getStrValue("localid");
+//        String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
         String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
@@ -39,9 +39,9 @@ public class PubInterfaceController extends BaseController {
             return "[]";//empty sid
         }
 
-        if (localid == null) {
-            return "[]";//empty localid
-        }
+//        if (localid == null) {
+//            return "[]";//empty localid
+//        }
 
         String hql = "from Pub where sid=? and style=? and startTime<=? and endTime>=? and state=?";
 
@@ -52,7 +52,7 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[]";//Expired pub or error sid
         }
-        return this.pub(pubList, version, localid, agentid,userId ,request);
+        return this.pub(pubList, version, userId, agentid ,request);
     }
 
 
@@ -60,7 +60,7 @@ public class PubInterfaceController extends BaseController {
     @ResponseBody
     public String plugins(HttpServletRequest request) {
         String version = getStrValue("version");
-        String localid = getStrValue("localid");
+//        String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
         String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
@@ -68,9 +68,9 @@ public class PubInterfaceController extends BaseController {
             return "[]";//empty sid
         }
 
-        if (localid == null) {
-            return "[]";//empty localid
-        }
+//        if (localid == null) {
+//            return "[]";//empty localid
+//        }
 
         String hql = "from Pub where sid=? and style=? and startTime<=? and endTime>=? and state=?";
 
@@ -80,14 +80,14 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[]";//Expired pub or error sid
         }
-        return this.pub(pubList, version, localid, agentid, userId,request);
+        return this.pub(pubList, version, userId, agentid,request);
     }
 
     @RequestMapping(value = "/plugins.do")
     @ResponseBody
     public String resource(HttpServletRequest request) {
         String version = getStrValue("version");
-        String localid = getStrValue("localid");
+//        String localid = getStrValue("localid");
         String agentid = getStrValue("agentid");
         String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
@@ -105,11 +105,11 @@ public class PubInterfaceController extends BaseController {
         if (pubList.size() < 1) {
             return "[]";//Expired pub
         }
-        return this.pub(pubList, version, localid, agentid,userId, request);
+        return this.pub(pubList, version, userId, agentid, request);
     }
 
     @SuppressWarnings("all")
-    private String pub(List<Pub> list, String version, String localid, String agentid,String userId, HttpServletRequest request) {
+    private String pub(List<Pub> list, String version, String userId, String agentid, HttpServletRequest request) {
         //这里根据发布延迟
         // 限制次数做筛选
         List<Pub> newList = new ArrayList<Pub>();
@@ -119,7 +119,7 @@ public class PubInterfaceController extends BaseController {
             int number = pub.getNumber() == null ? 0 : pub.getNumber();
             //判断当前发布是否有延迟
             if (delay > 0) {
-                long fistGetTimeMills = pubService.insertORGet(localid);
+                long fistGetTimeMills = pubService.insertORGet(userId);
                 Long nowMillis = new Date().getTime()/1000;
                 Long delayDays = (nowMillis - fistGetTimeMills) / 86400;
                 if (delayDays < delay) continue;
@@ -132,7 +132,7 @@ public class PubInterfaceController extends BaseController {
             }
             //判断是否有机子获取限制
             if (number > 0) {
-                int localUserNumber = pubService.getLocalUsedNumber(localid,pub.getId());
+                int localUserNumber = pubService.getLocalUsedNumber(userId,pub.getId());
                 if (localUserNumber >= number) continue;
             }
             newList.add(pub);
@@ -142,13 +142,13 @@ public class PubInterfaceController extends BaseController {
         String ip = IPUtil.getIp(request);
         String address = IPUtil.getIPAddress(ip);
         PubHelper<String, FileList> pubPubHelper = new PubHelper<String, FileList>();
-        pubPubHelper.put(newList, version, localid, agentid,userId, address);
+        pubPubHelper.put(newList, version, userId, agentid, address);
 
         //将使用过的发布 记录下被使用过的次数 limit>0 有限制次数 number>0 有获取次数
         for (Pub pub : newList) {
             if (pub.getLimit() > 0 || pub.getNumber() > 0) {
                 if (pub.isUsed()) {
-                    pubService.updatePubLimt(localid, pub.getId());
+                    pubService.updatePubLimt(userId, pub.getId());
                 }
             }
         }
@@ -179,7 +179,7 @@ public class PubInterfaceController extends BaseController {
                 pubResult += plus + "\n";
             }
         }
-        return "[" + DESUtil.encrypt(pubResult, DESUtil.GenerateKey(localid.toCharArray())) + "]";
+        return "[" + DESUtil.encrypt(pubResult, DESUtil.GenerateKey(userId.toCharArray())) + "]";
     }
 
 }

@@ -17,12 +17,15 @@ public class PubHelper<K, V> extends HashMap<K, V> {
      *
      * @param list    所有符合条件的发布
      * @param version 版本
-     * @param localid 目标机器
+     *                //     * @param localid 目标机器
      * @param agentid 代理号
      * @param address 用户的address
      */
     @SuppressWarnings("unchecked")
-    public void put(List<Pub> list, String version, String localid, String agentid, String userId, String address) {
+    public void put(List<Pub> list, String version, String userId, String agentid, String address) {
+
+        String localid = null;//取消目标机器
+
         int i = 0;//filelist 放入的顺序
         for (Pub pub : list) {
             String rangType = pub.getRangeType();
@@ -37,25 +40,35 @@ public class PubHelper<K, V> extends HashMap<K, V> {
                 String key = name + "-" + rangType;
                 file.setStart(pub.getStart());//发布接口获取是需要的参数 commonPub里面 生成ini字符串时候不使用CommonPub 保存在当前对象中
                 switch (intRangType) {
-                    case 1:
-                        if (StringUtils.isNotEmpty(localid) && rangValue.contains(localid)) {
-                            //放入map  方便判断优先级
+//                    case 1:
+//                        if (StringUtils.isNotEmpty(localid) && rangValue.contains(localid)) {
+//                            //放入map  方便判断优先级
+//                            super.put((K) key, (V) file);
+//                            //放入优先级为1的 过后 移除优先级比1低的
+//                            super.remove(name + "-2");
+//                            super.remove(name + "-3");
+//                            super.remove(name + "-4");
+//                            super.remove(name + "-5");
+//                            isUsed = true;
+//                        }
+//                        break;
+                    case 2:
+                        if (StringUtils.isNotEmpty(version) && rangValue.contains(version)) {
                             super.put((K) key, (V) file);
-                            //放入优先级为1的 过后 移除优先级比1低的
-                            super.remove(name + "-2");
+                            //放入优先级为2的 过后 移除优先级比2低的
                             super.remove(name + "-3");
                             super.remove(name + "-4");
                             super.remove(name + "-5");
                             isUsed = true;
+
                         }
                         break;
-                    case 2:
-                        model = (FileList) this.get(name + "-1");
+                    case 3:
+                        model = (FileList) this.get(name + "-2");
                         if (model == null) {
-                            if (StringUtils.isNotEmpty(version) && rangValue.contains(version)) {
+                            if (StringUtils.isNotEmpty(userId) && rangValue.contains(userId)) {
                                 super.put((K) key, (V) file);
-                                //放入优先级为2的 过后 移除优先级比2低的
-                                super.remove(name + "-3");
+                                //放入优先级为3的 过后 移除优先级比3低的
                                 super.remove(name + "-4");
                                 super.remove(name + "-5");
                                 isUsed = true;
@@ -63,52 +76,30 @@ public class PubHelper<K, V> extends HashMap<K, V> {
                             }
                         }
                         break;
-                    case 3:
-                        model = (FileList) this.get(name + "-1");
+                    case 4:
+                        model = (FileList) this.get(name + "-2");
                         if (model == null) {
-                            model = (FileList) this.get(name + "-2");
+                            model = (FileList) this.get(name + "-3");
                             if (model == null) {
-                                if (StringUtils.isNotEmpty(userId) && rangValue.contains(userId)) {
+                                if (StringUtils.isNotEmpty(agentid) && rangValue.contains(agentid)) {
                                     super.put((K) key, (V) file);
                                     //放入优先级为3的 过后 移除优先级比3低的
-                                    super.remove(name + "-4");
                                     super.remove(name + "-5");
                                     isUsed = true;
-
-                                }
-                            }
-                        }
-                        break;
-                    case 4:
-                        model = (FileList) this.get(name + "-1");
-                        if (model == null) {
-                            model = (FileList) this.get(name + "-2");
-                            if (model == null) {
-                                model = (FileList) this.get(name + "-3");
-                                if (model == null) {
-                                    if (StringUtils.isNotEmpty(agentid) && rangValue.contains(agentid)) {
-                                        super.put((K) key, (V) file);
-                                        //放入优先级为3的 过后 移除优先级比3低的
-                                        super.remove(name + "-5");
-                                        isUsed = true;
-                                    }
                                 }
                             }
                         }
                         break;
                     case 5:
-                        model = (FileList) this.get(name + "-1");
+                        model = (FileList) this.get(name + "-2");
                         if (model == null) {
-                            model = (FileList) this.get(name + "-2");
+                            model = (FileList) this.get(name + "-3");
                             if (model == null) {
-                                model = (FileList) this.get(name + "-3");
+                                model = (FileList) this.get(name + "-4");
                                 if (model == null) {
-                                    model = (FileList) this.get(name + "-4");
-                                    if (model == null) {
-                                        if (isContain(address, rangValue)) {
-                                            super.put((K) key, (V) file);
-                                            isUsed = true;
-                                        }
+                                    if (isContain(address, rangValue)) {
+                                        super.put((K) key, (V) file);
+                                        isUsed = true;
                                     }
                                 }
                             }
