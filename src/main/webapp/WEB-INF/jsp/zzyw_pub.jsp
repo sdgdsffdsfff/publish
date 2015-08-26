@@ -145,15 +145,15 @@
 
                 <div class="r_form clearfix"><label class="labels_w">发布延迟：</label>
                     <input type="text" name="delay" id="delay" class="inputs easyui-numberbox"
-                           data-options="required:true,prompt:'0无延迟'" style="height: 28px;">
+                           data-options="required:true,prompt:'0无延迟'" value="0" style="height: 28px;">
                 </div>
                 <div class="r_form clearfix"><label class="labels_w">限制个数：</label>
                     <input type="text" name="limit" id="limit" class="inputs easyui-numberbox"
-                           data-options="required:true,prompt:'0无限制'" style="height: 28px;"/>
+                           data-options="required:true,prompt:'0无限制'" value="0" style="height: 28px;"/>
                 </div>
                 <div class="r_form clearfix"><label class="labels_w">获取次数：</label>
                     <input type="text" name="number" id="number" class="inputs easyui-numberbox"
-                           data-options="required:true,prompt:'0无限制'" style="height: 28px;"/>
+                           data-options="required:true,prompt:'0无限制'" value="0" style="height: 28px;"/>
                 </div>
                 <div class="r_form clearfix"><label class="labels_w">发布状态：</label><span>
                 <input type="radio" name="state" value="1" checked="checked"/> 启用</span><span>
