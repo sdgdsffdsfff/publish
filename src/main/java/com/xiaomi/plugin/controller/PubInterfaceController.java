@@ -36,11 +36,11 @@ public class PubInterfaceController extends BaseController {
         String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
         if (sid == null) {
-            return "[empty sid]";
+            return "[]";//empty sid
         }
 
         if (localid == null) {
-            return "[empty localid]";
+            return "[]";//empty localid
         }
 
         String hql = "from Pub where sid=? and style=? and startTime<=? and endTime>=? and state=?";
@@ -50,7 +50,7 @@ public class PubInterfaceController extends BaseController {
         List<Pub> pubList = pubService.getListByHQL(hql, sid, "1", date, date, "1");
 
         if (pubList.size() < 1) {
-            return "[Expired pub or error sid]";
+            return "[]";//Expired pub or error sid
         }
         return this.pub(pubList, version, localid, agentid,userId ,request);
     }
@@ -65,11 +65,11 @@ public class PubInterfaceController extends BaseController {
         String userId=getStrValue("UserId");
         String sid = getStrValue("sid");
         if (sid == null) {
-            return "[empty sid]";
+            return "[]";//empty sid
         }
 
         if (localid == null) {
-            return "[empty localid]";
+            return "[]";//empty localid
         }
 
         String hql = "from Pub where sid=? and style=? and startTime<=? and endTime>=? and state=?";
@@ -78,7 +78,7 @@ public class PubInterfaceController extends BaseController {
 
         List<Pub> pubList = pubService.getListByHQL(hql, sid, "2", date, date, "1");
         if (pubList.size() < 1) {
-            return "[Expired pub or error sid]";
+            return "[]";//Expired pub or error sid
         }
         return this.pub(pubList, version, localid, agentid, userId,request);
     }
@@ -103,7 +103,7 @@ public class PubInterfaceController extends BaseController {
         List<Pub> pubList = pubService.getListByHQL(hql, sid, "3", "4", date, date, "1");
 
         if (pubList.size() < 1) {
-            return "[Expired pub]";
+            return "[]";//Expired pub
         }
         return this.pub(pubList, version, localid, agentid,userId, request);
     }
