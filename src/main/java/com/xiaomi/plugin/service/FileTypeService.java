@@ -47,6 +47,8 @@ public class FileTypeService extends BaseService<FileType> {
             entity.setTime(new Date());
         }
 
+        entity.setFileName(entity.getUrl().substring(entity.getUrl().lastIndexOf("/")+1));
+
         entity.setFileType(fileType);
         fileListService.saveFile(entity);
 

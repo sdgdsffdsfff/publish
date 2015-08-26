@@ -40,14 +40,14 @@
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="list2 table">
                         <thead>
                         <tr>
-                            <th width="5%"><input type="checkbox" id="checkall"/> 全选</th>
-                            <th width="5%">序号</th>
-                            <th width="10%">资源版本</th>
-                            <th width="15%">上传日期</th>
-                            <th width="15%">MD5</th>
+                            <th width="3%"><input type="checkbox" id="checkall"/> 全选</th>
+                            <th width="3%">序号</th>
+                            <th width="8%">资源版本</th>
+                            <th width="10%">上传日期</th>
+                            <th width="25%">MD5</th>
                             <th>下载地址</th>
-                            <th width="5%">上传用户</th>
-                            <th width="10%">操作</th>
+                            <th width="15%">上传用户</th>
+                            <th width="20%">操作</th>
                         </tr>
                         </thead>
 
@@ -70,7 +70,7 @@
                                     <td>${fl.version}</td>
                                     <td>${fn:substring(fl.time, 0, 19)}</td>
                                     <td>${fl.md5}</td>
-                                    <td class="http"><a href="${fl.url}" target="_blank">${fl.url}</a> </td>
+                                    <td class="http"><a href="${fl.url}" target="_blank">${fl.fileName}</a> </td>
                                     <td>${fl.user.nickname}</td>
                                     <td class="operate">
                                         <a href="javascript:void (0)" class="edit" onclick="edit1(${fl.id});">编辑</a>

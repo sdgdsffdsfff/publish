@@ -21,6 +21,9 @@ public class FileList {
      */
     private String url;
 
+    @Column(name = "[name]")
+    private String fileName;
+
     /**
      * 校验md5 0=不校验 1=校验
      */
@@ -356,5 +359,13 @@ public class FileList {
 
     public void setFileTypeId(String fileTypeId) {
         this.fileTypeId = fileTypeId;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }
