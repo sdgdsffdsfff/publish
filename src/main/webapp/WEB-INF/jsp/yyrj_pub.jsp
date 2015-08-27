@@ -11,6 +11,12 @@
         .datagrid-btable tr {
             height: 31px;
         }
+        .icon-add{
+            background:url('/resources/images/save_add.png') no-repeat center center !important;
+        }
+        .icon-remove{
+            background:url('/resources/images/close_add.png') no-repeat center center !important;
+        }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>通用更新管理后台</title>

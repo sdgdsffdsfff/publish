@@ -7,7 +7,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
+    <style type="text/css">
+        .icon-add{
+            background:url('/resources/images/save_add.png') no-repeat center center !important;
+        }
+        .icon-remove{
+            background:url('/resources/images/close_add.png') no-repeat center center !important;
+        }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>通用更新管理后台</title>
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>
